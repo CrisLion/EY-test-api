@@ -14,6 +14,6 @@ public class SupplierRepository : BaseRepository<Supplier>, ISupplierRepository
 
     public async Task<IReadOnlyCollection<Supplier>> GetSuppliersByUserId(int userId)
     {
-        return await Context.Suppliers.Where(s => s.UserId == userId).ToListAsync();
+        return await Context.Suppliers.Where(s => s.UserId == userId).OrderByDescending(s => s.UpdatedAt ?? s.CreatedAt).ToListAsync();
     }
 }
