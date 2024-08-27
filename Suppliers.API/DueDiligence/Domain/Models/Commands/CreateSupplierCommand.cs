@@ -3,6 +3,7 @@
 namespace Suppliers.API.DueDiligence.Domain.Models.Commands;
 
 public record CreateSupplierCommand(
+    [Required(ErrorMessage = "The user Id is required")] [Range(1, int.MaxValue, ErrorMessage = "The number field must be a positive integer")] int UserId,
     [Required] [MinLength(1, ErrorMessage = "CompanyName cannot be empty")] string CompanyName,
     [Required] [MinLength(1, ErrorMessage = "CompanyName cannot be empty")] string BrandName,
     [Required] [Range(10000000000, 99999999999, ErrorMessage = "Tax identification must be between 10000000000 and 99999999999")] long TaxIdentification,

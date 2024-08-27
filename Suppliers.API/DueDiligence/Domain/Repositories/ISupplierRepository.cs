@@ -5,5 +5,5 @@ namespace Suppliers.API.DueDiligence.Domain.Repositories;
 
 public interface ISupplierRepository : IBaseRepository<Supplier>
 {
-    
+    Task<IReadOnlyCollection<Supplier>> GetSuppliersByUserId(int userId);
 }

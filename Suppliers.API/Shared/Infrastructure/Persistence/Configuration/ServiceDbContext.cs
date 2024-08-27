@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Suppliers.API.DueDiligence.Domain.Models.Aggregate;
+using Suppliers.API.Security.Domain.Models.Aggregates;
 using Suppliers.API.Shared.Domain.Models.Entities;
 
 namespace Suppliers.API.Shared.Infrastructure.Persistence.Configuration;
@@ -41,7 +42,14 @@ public class ServiceDbContext : DbContext
         builder.Entity<Supplier>().Property(s => s.Website).IsRequired();
         builder.Entity<Supplier>().Property(s => s.Country).IsRequired();
         builder.Entity<Supplier>().Property(s => s.AnnualBillingInDollars).IsRequired();
+        builder.Entity<Supplier>().HasOne(s => s.User).WithMany(u => u.Suppliers).HasForeignKey(s => s.UserId).IsRequired().OnDelete(DeleteBehavior.Cascade);
+        
+        builder.Entity<User>().Property(s => s.Id).ValueGeneratedOnAdd();
+        builder.Entity<User>().Property(s => s.Username).IsRequired().HasMaxLength(30);
+        builder.Entity<User>().Property(s => s.Password).IsRequired().HasMaxLength(120);
+        builder.Entity<User>().HasMany(s => s.Suppliers).WithOne(s => s.User).HasForeignKey(s => s.UserId).IsRequired().OnDelete(DeleteBehavior.Cascade);
     }
     
     public DbSet<Supplier> Suppliers { get; set; }
+    public DbSet<User> Users { get; set; }
 }

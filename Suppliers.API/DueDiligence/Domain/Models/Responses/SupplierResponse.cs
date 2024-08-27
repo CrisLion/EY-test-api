@@ -2,6 +2,7 @@
 
 public record SupplierResponse(
     int Id,
+    string CompanyName,
     string BrandName,
     long TaxIdentification,
     string TelephoneNumber,

@@ -1,4 +1,5 @@
-﻿using Suppliers.API.Shared.Domain.Models.Entities;
+﻿using Suppliers.API.Security.Domain.Models.Aggregates;
+using Suppliers.API.Shared.Domain.Models.Entities;
 
 namespace Suppliers.API.DueDiligence.Domain.Models.Aggregate;
 
@@ -12,4 +13,6 @@ public class Supplier : BaseDomainModel
     public required string Website { get; set; }
     public required string Country { get; set; }
     public required double AnnualBillingInDollars { get; set; }
+    public required int UserId { get; set; }
+    public User User { get; set; }
 }

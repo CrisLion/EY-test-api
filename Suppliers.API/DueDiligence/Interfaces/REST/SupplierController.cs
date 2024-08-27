@@ -26,6 +26,14 @@ public class SupplierController : ControllerBase
         var result = await _supplierQueryService.Handle(query);
         return Ok(result);
     }
+    
+    [HttpGet("filter")]
+    public async Task<IActionResult> GetSuppliersByUserId([FromQuery] int userId)
+    {
+        var query = new GetSuppliersByUserId(userId);
+        var result = await _supplierQueryService.Handle(query);
+        return Ok(result);
+    }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetSupplier(int id)
