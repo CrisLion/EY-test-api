@@ -8,4 +8,5 @@ public interface ISupplierQueryService
 {
     Task<SupplierResponse> Handle(GetSupplierByIdQuery query);
     Task<IReadOnlyCollection<SupplierResponse>> Handle(GetSuppliersQuery query);
+    Task<IReadOnlyCollection<SupplierResponse>> Handle(GetSuppliersByUserId query);
 }
